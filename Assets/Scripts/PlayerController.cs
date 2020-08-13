@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
     public float speed = 200f;
+    private int score = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,5 +32,12 @@ public class PlayerController : MonoBehaviour
         {
             rb.AddForce(0, 0, -speed * Time.deltaTime);
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        Destroy(other.gameObject);
+        score += 1;
+        Debug.Log("Score: " + score);
     }
 }
