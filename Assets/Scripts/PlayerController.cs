@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Rigidbody rb;
-    public float speed = 200f;
+    public float speed = 400f;
     private int score = 0;
+    public int health = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -36,8 +37,16 @@ public class PlayerController : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        Destroy(other.gameObject);
-        score += 1;
-        Debug.Log("Score: " + score);
+        if (other.tag == "Trap")
+        {
+            health -= 1;
+            Debug.Log("Health: " + health);
+        }
+        if (other.tag == "Pickup")
+        {
+            Destroy(other.gameObject);
+            score += 1;
+            Debug.Log("Score: " + score);
+        }
     }
 }
